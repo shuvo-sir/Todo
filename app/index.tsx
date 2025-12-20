@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+interface Todo {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
+const initialTodo: Todo[] = [
+  {id: 1, text: "leaen React Native", done: true},
+  {id: 2, text: "Learn React", done: false},
+];  
+
+
 const Index = () => {
+  const [todos, setTodos] = useState<Todo[]>(initialTodo)
   return (
-    <View style={styles.container}>
-      <View >
-        <Text style= {styles.payel}>Payel akta bolod</Text>
+    <View>
+      <View>
+        <Text>Todos</Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex: 1, // Makes the container take up available space
-    justifyContent: 'center', // Centers content vertically
-    alignItems: 'center', // Centers content horizontally
-  },
-  payel:{
-       textAlign: "center",
-       fontSize: 40,
-       color: "red",
-       fontStyle: "italic"
-  }
 })
 
 export default Index;
