@@ -1,6 +1,7 @@
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Checkbox } from 'react-native-paper';
 
 interface Todo {
   id: number;
@@ -24,6 +25,7 @@ const Index = () => {
 
         {todos.map((todo) => (
           <View key={todo.id} style={styles.todoCard}>
+             <Checkbox.Item label="Item" status="checked" />
             <Text style={styles.todoTitle}>{todo.text}</Text>
           </View>
         ))}
