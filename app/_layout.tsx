@@ -12,7 +12,11 @@ export default function RootLayout() {
             
           }}
         />
-        <Stack.Screen name="create" />
+        <Stack.Screen name="create" 
+          options={{
+            headerTitle: "Create Todo"
+          }}
+        />
       </Stack>
   </PaperProvider>
   );

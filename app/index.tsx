@@ -1,7 +1,8 @@
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+import { AppButton } from '../components';
 
 interface Todo {
   id: number;
@@ -25,17 +26,16 @@ const Index = () => {
 
         {todos.map((todo) => (
           <View key={todo.id} style={styles.todoCard}>
-             <Checkbox.Item label="Item" status="checked" />
+             <Checkbox.Item label="" status="unchecked" />
             <Text style={styles.todoTitle}>{todo.text}</Text>
           </View>
         ))}
       </View>
       <View>
         <Link asChild href="/create">
-          <TouchableOpacity style={styles.createTodoButton}
-          activeOpacity={0.6}>
-            <Text style={styles.createTodoButtonText}>Create Todo</Text>
-          </TouchableOpacity>
+          <AppButton
+          onPress={() => {}}
+          >Create Todo</AppButton>
         </Link>
       </View>
     </View>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   // todo card styles
   todoCard: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     paddingHorizontal: 10,
     paddingVertical: 10,
@@ -77,21 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  // create todo button styles
-  createTodoButton: {
-    backgroundColor: "#000",
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    margin: 10,
-    borderRadius: 30,
-    alignItems: "center",
-    marginTop: 10,
-  },
-
-  createTodoButtonText: {
-    color: "#fff",
-    fontSize: 18,
-  },
+ 
 })
 
 
