@@ -1,11 +1,25 @@
 import { AppButton } from '@/components';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { TodoContext } from '@/context/Todo.context';
+import React, { use } from 'react';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 
 export default function CreateTodo() {
    const [text, setText] = React.useState("");
+   const {addTodo} = use(TodoContext);
+
+   const handleAddTodo = () => {
+       if(!text){
+          Alert.alert("Error", "Please enter a Todo item.");
+          return;
+       }
+
+        // Add todo logic here
+        addTodo?.(text);
+        setText("");
+        Alert.alert("Success", "Todo item added successfully.");
+     }
 
   return (
     <View style={styles.container}>
@@ -20,7 +34,7 @@ export default function CreateTodo() {
       />
 
       <AppButton
-        onPress={() => {}}
+        onPress={handleAddTodo}
       >
         Create Todo
       </AppButton>

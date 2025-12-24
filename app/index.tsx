@@ -1,23 +1,14 @@
+import { TodoContext } from '@/context/Todo.context';
 import { Link } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { AppButton } from '../components';
 
-interface Todo {
-  id: number;
-  text: string;
-  done: boolean;
-}
 
-const initialTodo: Todo[] = [
-  {id: 1, text: "leaen React Native", done: true},
-  {id: 2, text: "Learn React", done: false},
-];  
-initialTodo
 
 const Index = () => {
-  const [todos, setTodos] = useState<Todo[]>(initialTodo);
+  const {todos} = useContext(TodoContext);
   return (
     <View style={styles.container}>
       <View style={styles.todoContainer}>
@@ -30,6 +21,7 @@ const Index = () => {
             <Text style={styles.todoTitle}>{todo.text}</Text>
           </View>
         ))}
+        {todos.length === 0 && (<Text style={styles.noTodos}>No todos available. Create one!</Text>)}
       </View>
       <View>
         <Link asChild href="/create">
@@ -76,7 +68,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
-
+  noTodos: {
+    fontSize: 16,
+    fontStyle: "italic",
+    color: "#888",
+    marginTop: 5,
+  },
  
 })
 
