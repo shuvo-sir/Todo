@@ -1,9 +1,10 @@
 import { createContext, useState } from "react";
 
-interface Todo {
+export interface Todo {
     id: number;
     text: string;
     done: boolean;
+    timestamp?: number;
 }
 
 interface TodoContextType {
@@ -28,7 +29,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
 
     // add todo
     const addTodo = (text: string) => {
-        setTodos([...todos, { id: todos.length + 1, text, done: false }]); //{id: todos.length + 1, text, done: false }
+        setTodos([...todos, { id: todos.length + 1, text, done: false, timestamp: Date.now() }]); //{id: todos.length + 1, text, done: false }
     };
 
     // toggle todo
