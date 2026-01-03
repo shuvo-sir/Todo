@@ -27,7 +27,7 @@ const formattedTime = date.toLocaleTimeString("en-BD", {
   hour12: true,
 });
 
-const {removeTodo} = useContext(TodoContext);
+const {removeTodo, toggleTodo} = useContext(TodoContext);
 
 const handleRemoveTodo = (id: number) => {
   Alert.alert(
@@ -47,7 +47,12 @@ const handleRemoveTodo = (id: number) => {
       activeOpacity={0.5} 
       key={todo.id} 
       style={styles.todoCard}>
-                 <Checkbox.Item label="" status="unchecked" />
+                <Checkbox.Item 
+                  label="" 
+                  status={todo.done ? "checked" : "unchecked"}
+                  onPress={() => toggleTodo?.(todo.id)} 
+                />
+
                 <Text style={styles.todoTitle}>{todo.text}</Text>
                 <Text style={styles.timeText}>
                   <Text style={styles.dateText}>{formattedDate}</Text>
