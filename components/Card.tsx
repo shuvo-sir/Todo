@@ -1,6 +1,6 @@
-import { Todo } from '@/context/Todo.context';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Todo, TodoContext } from '@/context/Todo.context';
+import React, { useContext } from 'react';
+import { Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 
 
@@ -27,9 +27,26 @@ const formattedTime = date.toLocaleTimeString("en-BD", {
   hour12: true,
 });
 
+const {removeTodo} = useContext(TodoContext);
+
+const handleRemoveTodo = (id: number) => {
+  Alert.alert(
+    "Delete",
+    "Are you sure you want to delete?",
+    [
+      { text: "Cancel", style: "cancel" },
+      { text: "Delete", onPress: () => removeTodo?.(id) }
+    ]
+  );
+}
+
   return (
     
-    <View key={todo.id} style={styles.todoCard}>
+    <TouchableOpacity
+      onLongPress={() => handleRemoveTodo(todo.id)}
+      activeOpacity={0.5} 
+      key={todo.id} 
+      style={styles.todoCard}>
                  <Checkbox.Item label="" status="unchecked" />
                 <Text style={styles.todoTitle}>{todo.text}</Text>
                 <Text style={styles.timeText}>
@@ -38,7 +55,7 @@ const formattedTime = date.toLocaleTimeString("en-BD", {
                   <Text style={styles.clockText}>{formattedTime}</Text>
               </Text>
 
-    </View>
+    </TouchableOpacity>
   );
 } 
 
